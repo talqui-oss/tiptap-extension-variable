@@ -1,7 +1,7 @@
 {
   "name": "@talqui-oss/tiptap-extension-variable",
   "description": "Variable extension for tiptap by Talqui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://talqui.chat",
   "keywords": [
     "talqui",
