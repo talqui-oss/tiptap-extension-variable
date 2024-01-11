@@ -33,6 +33,7 @@
     "@tiptap/core": "^2.2.0-rc.8",
     "@tiptap/pm": "^2.2.0-rc.8",
     "@tiptap/suggestion": "^2.2.0-rc.8",
+    "rollup": "^4.9.4",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-typescript2": "^0.36.0"
