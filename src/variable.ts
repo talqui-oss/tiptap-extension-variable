@@ -10,6 +10,7 @@ export type VariableOptions = {
   renderText: (props: { options: VariableOptions; node: ProseMirrorNode }) => string
   renderHTML: (props: { options: VariableOptions; node: ProseMirrorNode }) => DOMOutputSpec
   suggestion: Omit<SuggestionOptions, 'editor'>
+  customItems: any,
 }
 
 export const VariablePluginKey = new PluginKey('variable')
@@ -36,6 +37,15 @@ export const Variable = Node.create<VariableOptions>({
 
   addOptions() {
     return {
+      customItems: ({ query }: any) => {
+        return [
+          { label: "Primeiro Nome", value: "{{ contact.contactFirstname }}" },
+          { label: "Sobrenome", value: "{{ contact.contactLastname }}" },
+          { label: "E-mail", value: "{{ contact.contactEmail }}" },
+          { label: "Telefone", value: "{{ contact.contactPhone }}" }
+        ].filter(item => item.label.toLowerCase().startsWith(query.toLowerCase())).slice(0, 5)
+      },
+
       HTMLAttributes: {
         class: "variable",
       },
@@ -83,19 +93,6 @@ export const Variable = Node.create<VariableOptions>({
 
           return allow
         },
-
-        /**
-         * Default values for suggestions
-         */
-        items: ({ query }) => {
-          return [
-            { label: "Primeiro Nome", value: "{{ contact.contactFirstname }}" },
-            { label: "Sobrenome", value: "{{ contact.contactLastname }}" },
-            { label: "E-mail", value: "{{ contact.contactEmail }}" },
-            { label: "Telefone", value: "{{ contact.contactPhone }}" }
-          ].filter(item => item.label.toLowerCase().startsWith(query.toLowerCase())).slice(0, 5)
-        },
-
       },
     }
   },
@@ -219,6 +216,7 @@ export const Variable = Node.create<VariableOptions>({
       Suggestion({
         editor: this.editor,
         ...this.options.suggestion,
+        ...(typeof this.options.customItems === 'function' && { items: this.options.customItems })
       }),
     ]
   },
