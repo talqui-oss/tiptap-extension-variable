@@ -54,7 +54,9 @@ export const Variable = Node.create<VariableOptions>({
       },
       renderHTML({ options, node }) {
         const htmlAttributes = Object.assign(this.HTMLAttributes, { class: 'variable' })
-        htmlAttributes.style = `background-color: #${generatePalette(node.attrs.id)};`
+        htmlAttributes.style = `background-color: #${generatePalette(node.attrs.label)};`
+        htmlAttributes['data-label'] = node.attrs.label;
+        htmlAttributes['data-id'] = node.attrs.label;
 
         return [
           'span',
