@@ -50,7 +50,7 @@ export const Variable = Node.create<VariableOptions>({
         class: "variable",
       },
       renderText({ options, node }) {
-        return `${node.attrs.id}`
+        return `{{ ${node.attrs.id} }}`
       },
       renderHTML({ options, node }) {
         const htmlAttributes = Object.assign(this.HTMLAttributes, { class: 'variable' })
